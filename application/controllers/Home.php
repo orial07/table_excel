@@ -493,17 +493,16 @@ function upload(){
         
     }
 
+	//private method to create an excel file with the table created by the user 
+	private function excel( $filename ){
 
-private function excel( $filename ){
-
-//load our new PHPExcel library
-$this->load->library('excel');
-
-$file = './docs/'.$filename;
-//load the excel library
-$this->load->library('excel');
-//read file from path
-$objPHPExcel = PHPExcel_IOFactory::load($file);
+		//load our new PHPExcel library
+			$this->load->library('excel');
+		        $file = './docs/'.$filename;
+			//load the excel library
+				$this->load->library('excel');
+		//read file from path
+			$objPHPExcel = PHPExcel_IOFactory::load($file);
 //get only the Cell Collection
 $cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
 //extract to a PHP readable array format
