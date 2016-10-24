@@ -11,65 +11,64 @@ class Table_model extends CI_Model {
 
 
 
-public function get_user($pass,$email){
-	
-		$query = $this->db->query("SELECT * FROM users WHERE password ='$pass' AND email ='$email' ");
-		if ($query->num_rows()>0) 
-		 {  
-		 	 return $query->row_array();
-		 } 
-		   else 
-				{return false;}
-	
-	
-}
-
-
-
-function insert_user($a){
- if($this->db->insert('users',$a))
-  return true;
-
-return false;
-
-
-}
-
-
-function insert_table($a){
- if($this->db->insert('tables',$a))
-  return true;
-
-return false;
-
-
-}
-
-
-
-public function get_tables($id){
-	
-		$query = $this->db->query("SELECT * FROM tables where id_user='$id'  ORDER BY updated desc ");
-		if ($query->num_rows()>0) 
-		 {  
-		 	return $query->result();
-		 } 
-		   else 
-				{return false;}
+          public function get_user($pass,$email)
+	       {       //Check user login details
+	       	 	$query = $this->db->query("SELECT * FROM users WHERE password ='$pass' AND email ='$email' ");
+		 	 	if ($query->num_rows()>0) 
+		 		{       //return the user data 
+		 			 return $query->row_array();
+				 } 
+		  			 else 
+					 	{return false;}
 	
 	
-}
+		}
 
 
-public function get_table($id,$table_id){
+
+	function insert_user($a)
+	            {//Register user in 
+ 			if($this->db->insert('users',$a))
+  				return true;
+					//If the data is not inserted in the database 
+					return false;
+		    }
+
+			//Insert table created by the user 
+				function insert_table($a)
+				    {        //insert table in the db 
+ 						if($this->db->insert('tables',$a))
+  							return true;
+
+								return false;
+ 						}
+
+
+				//Get tables created by user 
+				public function get_tables($id)
+						    {
+							$query = $this->db->query("SELECT * FROM tables where id_user='$id'  ORDER BY updated desc ");
+								if ($query->num_rows()>0) 
+		 						{  
+		 							return $query->result();
+		 						} 
+		   						 	else 
+										{return false;}
 	
-		$query = $this->db->query("SELECT * FROM tables where id_user='$id' and table_id='$table_id'   ");
-		if ($query->num_rows()>0) 
-		 {  
-		 	return $query->row_array();
-		 } 
-		   else 
-				{return false;}
+	
+						   }
+
+                         
+			public function get_table($id,$table_id)
+			{
+	
+		         $query = $this->db->query("SELECT * FROM tables where id_user='$id' and table_id='$table_id'   ");
+		    		if ($query->num_rows()>0) 
+		 		{  
+		 			return $query->row_array();
+		 		} 
+		   			else 
+						{return false;}
 	
 	
 }
